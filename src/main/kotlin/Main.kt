@@ -3,7 +3,7 @@ import controllers.Example
 import io.ktor.application.*
 import io.ktor.http.content.resources
 import io.ktor.http.content.static
-import io.ktor.routing.*
+import io.ktor.routing.*2
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import libs.json.toJson

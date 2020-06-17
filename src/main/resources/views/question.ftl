@@ -7,9 +7,9 @@
     <h2>${num}</h2>
     <hr>
     <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary" onclick="onClick(${pre})">上一題</button>
-        <button type="button" class="btn btn-secondary" onclick="onClick(0)">隨機</button>
-        <button type="button" class="btn btn-secondary" onclick="onClick(${next})">下一題</button>
+        <button type="button" class="btn btn-secondary" onclick="onClick(${pre});">上一題</button>
+        <button type="button" class="btn btn-secondary" onclick="onClick(0);">隨機</button>
+        <button type="button" class="btn btn-secondary" onclick="onClick(${next});">下一題</button>
     </div>
     <br>
     <br>  
@@ -25,7 +25,9 @@
         <br>
     </#list>  
     <br>
-    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="showAns()">顯示答案</button>
+    <div id="result"></div>
+    <br>
+    <button id="show_ans" type="button" class="btn btn-primary btn-lg btn-block" onclick="showAns();">顯示答案</button>
     <br>
    
 
@@ -41,15 +43,31 @@ function onClick(page){
 }
 
 function showAns(){
-    console.log("Ans is ${ans}");
+    const ans = "${ans}";
+    console.log("Ans is " +ans);
 
-    let flag = true;
+    const chars = ['A','B','C','D','E','F','G','H'];
+    let isCorrect = true;
+    let i = 0;
     $(".opt").each(function(){
-        console.log($(this).val());
+        if( !ans.includes(chars[i]) && $(this).prop("checked") ){
+            isCorrect = false;
+        }
+
+        if( ans.includes(chars[i]) && !$(this).prop("checked") ){
+            isCorrect = false;
+        }
+
+        i++;
     });
     
 
-    console.log(flag);
+    console.log(isCorrect);
+    if(isCorrect){
+        $("#result").html('<div class="alert alert-success" role="alert">正確</div>');
+    }else{
+        $("#result").html('<div class="alert alert-danger" role="alert">錯誤</div>');
+    }
 
 }
 
