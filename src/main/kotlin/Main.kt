@@ -18,7 +18,7 @@ fun main(args:Array<String>) {
 
     embeddedServer(Netty, 22333) {
         routing {
-//            get("/"){Example(call).index()}
+            get("/"){Example(call).index()}
 
             route("/v0.1/exam/BigData_20200413") {
                 get("/question") { BigData20200413(call).getQuestion() }

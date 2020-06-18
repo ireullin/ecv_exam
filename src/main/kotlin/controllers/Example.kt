@@ -8,7 +8,8 @@ import io.ktor.response.respondText
 
 class Example(val call:ApplicationCall){
     suspend fun index(){
-        call.respondText("fuck root", ContentType.Text.Html)
+        val html = Html("/home.ftl").render()
+        call.respondText(html,ContentType.Text.Html)
     }
 
     suspend fun echo(){
