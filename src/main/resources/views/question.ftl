@@ -7,9 +7,9 @@
     <h2>${num}</h2>
     <hr>
     <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary" onclick="onClick(${pre});">上一題</button>
-        <button type="button" class="btn btn-secondary" onclick="onClick(0);">隨機</button>
-        <button type="button" class="btn btn-secondary" onclick="onClick(${next});">下一題</button>
+        <button id="btn_pre"  type="button" class="btn btn-secondary" >上一題</button>
+        <button id="btn_ran"  type="button" class="btn btn-secondary" >隨機</button>
+        <button id="btn_next" type="button" class="btn btn-secondary" >下一題</button>
     </div>
     <br>
     <br>  
@@ -27,20 +27,22 @@
     <br>
     <div id="result"></div>
     <br>
-    <button id="show_ans" type="button" class="btn btn-primary btn-lg btn-block" onclick="showAns();">顯示答案</button>
+    <button id="show_ans" type="button" class="btn btn-primary btn-lg btn-block" >顯示答案</button>
     <br>
    
 
 </div>
-</body>
+
 <script>
-function onClick(page){
-    console.log(page);
-    if(page==0)
-        window.location = "/v0.1/exam/BigData_20200413/question";
-    else
-        window.location = "/v0.1/exam/BigData_20200413/question/"+page;
-}
+
+$(function() {
+    console.log("onready");
+    $("#btn_pre").bind("click",  function(e){ window.location = "/v0.1/exam/${path}/question/${pre}"; });
+    $("#btn_ran").bind("click",  function(e){ window.location = "/v0.1/exam/${path}/question"; });
+    $("#btn_next").bind("click", function(e){ window.location = "/v0.1/exam/${path}/question/${next}"; });
+    $("#show_ans").bind("click", showAns);
+});
+
 
 function showAns(){
     const ans = "${ans}";
@@ -72,4 +74,5 @@ function showAns(){
 }
 
 </script>
+</body>
 </html>

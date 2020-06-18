@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory
 import java.io.File
 import kotlin.random.Random
 
-class BigData20200413(val call: ApplicationCall){
+class AWSSecurityPart2 (val call: ApplicationCall){
     companion object{
         data class Question(val qNum:String, val q:String, val opts:List<String>, val ans:String, val comment:String)
         private val questions:MutableList<Question> = mutableListOf()
@@ -20,14 +20,14 @@ class BigData20200413(val call: ApplicationCall){
 
     suspend fun getQuestion(){
         if(questions.isEmpty())
-            readSrc()
+            parse()
 
         val num = call.parameters["num"]?.toInt()?: r.nextInt(1, questions.size)
         val idx = num -1
         val q = questions[idx]
         val html = Html("/question.ftl").render(
-                "title" to "BigData20200413",
-                "path" to "BigData_20200413",
+                "title" to "AWS Security Part2",
+                "path" to "AWSSecurityPart2",
                 "num" to q.qNum,
                 "content" to q.q,
                 "opts" to q.opts,
@@ -35,14 +35,14 @@ class BigData20200413(val call: ApplicationCall){
                 "pre" to num-1,
                 "next" to num+1
         )
-        call.respondText(html,ContentType.Text.Html)
+        call.respondText(html, ContentType.Text.Html)
     }
 
 
-    fun readSrc(){
-        val lines = File("data/BigData_20200413.txt").readLines().map{it.trim()}.filter { it.isNotEmpty() }
+    fun parse(){
+        val lines = File("data/AWSSecurityPart2.txt").readLines().map{it.trim()}.filter { it.isNotEmpty() }
         val subtitles = mutableListOf<MutableList<String>>()
-        val qNumReg = Regex("Q\\d+")
+        val qNumReg = Regex("\\d+\\.\\s+[\\s\\S]*\$")
         lines.forEach {line->
             when(qNumReg.matches(line)) {
                 true -> subtitles.add(mutableListOf(line))
@@ -51,22 +51,27 @@ class BigData20200413(val call: ApplicationCall){
         }
 
         val optReg = Regex("^[A-H]{1}\\.\\s+[\\s\\S]*$")
-        val _questions = subtitles.map {sub->
-            val part = mutableListOf(mutableListOf<String>()) //mutableListOf<MutableList<String>>()
-            sub.drop(1).forEach{ line->
+        val _questions = subtitles.mapIndexed {i,sub->
+            val part = mutableListOf(mutableListOf<String>())
+            sub.forEach{ line->
                 log.info(line)
                 when{
                     optReg.matches(line) -> part.add(mutableListOf(line))
-                    line.startsWith("Ans:") -> part.add(mutableListOf(line.replace("Ans:","").trim() ))
+                    line.startsWith("Ans :") -> part.add(mutableListOf(dropRedundancy(line)))
                     else -> part.last().add(line)
                 }
             }
             val t = part.map { it.joinToString("\n") }
             log.info(t.toString())
-            Question(sub[0], t.first(), t.drop(1).dropLast(1), t.last(),"" )
+            Question((i+1).toString(), t.first(), t.drop(1).dropLast(1), t.last(),"" )
         }
 
         questions.clear()
         questions.addAll(_questions)
     }
+
+    fun dropRedundancy(s:String)= s.replace("Ans :","").replace("\n", "").trim()
+
+
+
 }

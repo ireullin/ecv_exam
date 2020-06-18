@@ -161,7 +161,7 @@ A. EMRFS consistent view with a common Amazon DynamoDB table
 B. Bootstrap action to change the Hive Metastore to an Amazon RDS database
 C. s3distcp with the outputManifest option to generate RDS DDL
 D. Naming scheme support with automatic partition discovery from Amazon S3
-Ans : A
+Ans: A
 Q11
 An administrator needs to manage a large catalog of items from various external
 sellers. The administrator needs to determine if the items should be identified as
@@ -182,7 +182,7 @@ the DynamoDB Streams as every new item description is added to the system.
 D. Build a machine learning model with binary classification for dangerous goods and
 run it on the DynamoDB Streams as every new item description is added to the
 system.
-Ans : B
+Ans: B
 Q12
 A company receives data sets coming from external providers on Amazon S3. Data
 sets from different providers are dependent on one another. Data sets will arrive at
@@ -236,7 +236,7 @@ A. Create custom table views.
 B. Add interleaved sort keys per team.
 C. Maintain team-specific copies of the table.
 D. Add support for workload management queue hopping. 
-Ans : B
+Ans: B
 Q15
 A company operates an international business served from a single AWS region. The
 company wants to expand into a new country. The regulator for that country requires
@@ -251,7 +251,7 @@ C. Continue to serve customers from the existing region while using Amazon Kines
 to stream transaction data to the regulator.
 D. Use Amazon S3 cross-region replication to copy and persist production transaction
 logs to a bucket in the new countrys region.
-Ans: C
+Ans: D
 Q16
 An administrator needs to design the event log storage architecture for events from
 mobile devices. The event data will be processed by an Amazon EMR cluster daily for
@@ -293,7 +293,7 @@ Kibana to analyze.
 D. Write a program running on a separate EC2 instance to run queries to three
 different systems. Aggregate the results after getting the responses from all three
 systems.
-Ans : B
+Ans: B
 Q19
 An Amazon EMR cluster using EMRFS has access to petabytes of data on Amazon S3,
 originating from multiple unique data sources. The customer needs to query
@@ -332,7 +332,7 @@ B. Create a manual snapshot of the Amazon Redshift cluster.
 C. Make a copy of the automated snapshot on the Amazon Redshift cluster.
 D. Call the waitForSnapshotAvailable command from either the AWS CLI or an AWS
 SDK.
-Ans : B
+Ans: B
 Q22
 A large oil and gas company needs to provide near real-time alerts when peak 
 thresholds are exceeded in its pipeline system. The company has developed a system
@@ -385,7 +385,7 @@ C. Perform a client-side encryption of the data before it enters the Amazon Kine
 stream on the consumer.
 D. Use a shard to segment the data, which has built-in functionality to make it
 indecipherable while in transit.
-Ans : A
+Ans: A
 Q26
 An online photo album app has a key design feature to support multiple screens (e.g,
 desktop, mobile phone, and tablet) with high-quality displays. Multiple versions of
@@ -520,7 +520,7 @@ B. Generate a graph using MicroStrategy backed by a transient EMR cluster.
 C. Implement a Jupyter front-end provided by a continuously running EMR cluster
 leveraging spot instances for task nodes.
 D. Implement a Zeppelin application that runs on a long-running EMR cluster.
-Ans : A
+Ans: A
 Q33
 A system engineer for a company proposes digitalization and backup of large archives
 for customers. The systems engineer needs to provide users with a secure storage
@@ -553,7 +553,7 @@ for comprehensive durable data storage, processing, and querying.
 D. Launch an Amazon Relational Database Service (RDS), and use the enterprise
 grade and capacity of the Amazon Aurora engine for storage, processing, and
 querying.
-Ans : A
+Ans: A
 Q35
 A customer has a machine learning workflow that consists of multiple quick cycles of
 reads-writes-reads on
@@ -1066,7 +1066,7 @@ B. Use compute-optimized EC2 instances with an attached elastic GPU.
 C. Use general purpose GPU computing instances such as G3 and P3.
 D. Use processing parallelism to partition the workload over multiple storage devices
 and balance the workload within the GPUs.
-Ans : A C
+Ans: AC
 Q67
 An organization is soliciting public feedback through a web portal that has been
 deployed to track the number of requests and other important data. As part of
@@ -1121,7 +1121,7 @@ the Hive metastore information to derby.
 D. Create and configure an AWS Glue Data Catalog as a Hive metastore for Amazon
 EMR.
 Ans: D
-Q70 
+Q70
 An organization is using Amazon Kinesis Data Streams to collect data generated from
 thousands of temperature devices and is using AWS Lambda to process the data.
 Devices generate 10 to 12 million records every day, but Lambda is processing only
@@ -1407,7 +1407,7 @@ for ingestion into Amazon DynamoDB for real-time analytics.
 E. use multiple AWS Snowball Edge devices to transfer data to Amazon S3, and use
 Amazon Athena to query the data.
 Ans: C E
-Q84 
+Q84
 An organization is designing a public web application and has a requirement that
 states all application users must be centrally authenticated before any operations are
 permitted. The organization will need to create a user table with fast data lookup for

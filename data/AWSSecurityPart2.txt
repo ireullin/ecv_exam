@@ -1,0 +1,588 @@
+1.	 A Security Engineer must enforce the use of only Amazon EC2, Amazon S3, Amazon RDS, Amazon
+DynamoDB, and AWS STS in specific accounts.
+What is a scalable and efficient approach to meet this requirement?
+A.	Set up an AWS Organizations hierarchy, and replace the FullAWSAccess policy with the following Service Control Policy for the governed organization units:  
+B.	Create multiple IAM users for the regulated accounts, and attach the following policy statement to restrict services as required:  
+C.	Set up an Organizations hierarchy, replace the global FullAWSAccess with the following Service Control Policy at the top level:  
+D.	Set up all users in the Active Directory for federated access to all accounts in the company. Associate Active Directory groups with IAM groups, and attach the following policy statement to restrict services as required:
+
+
+
+
+Ans : A
+
+2.	 An application uses Amazon Cognito to manage end users' permissions when directly accessing AWS resources, including Amazon DynamoDB. A new feature request reads as follows:
+The priorities are to reduce complexity and avoid potential for future security issues.
+Which approach will meet these requirements and priorities?
+A. Create a new database field "suspended_status" and modify the application logic to validate that field when processing requests.
+B. Add suspended customers to second Cognito user pool and update the application login flow to check both user pools.
+C. Use Amazon Cognito Sync to push out a "suspension_status" parameter and split the lAM policy into normal users and suspended users.
+D. Move suspended customers to a second Cognito group and define an appropriate IAM access policy for the group.
+
+
+Ans : D
+
+3.	 A Security Engineer is looking for a way to control access to data that is being encrypted under a CMK. The Engineer is also looking to use additional authenticated data (AAD) to prevent tampering with ciphertext.
+Which action would provide the required functionality?
+A. Pass the key alias to AWS KMS when calling Encrypt and Decrypt API actions.
+B. Use IAM policies to restrict access to Encrypt and Decrypt API actions.
+C. Use kms:EncryptionContext as a condition when defining IAM policies for the CMK.
+D. Use key policies to restrict access to the appropriate IAM groups.
+
+
+Ans : C
+
+4.	An application makes calls to AWS services using the AWS SDK. The application runs on Amazon EC2 instances with an associated IAM role. When the application attempts to access an object within an Amazon S3 bucket; the Administrator receives the following error message: HTTP 403: Access Denied.
+Which combination of steps should the Administrator take to troubleshoot this issue? (Select three.)
+A. Confirm that the EC2 instance's security group authorizes S3 access.
+B. Verify that the KMS key policy allows decrypt access for the KMS key for this IAM principle.
+C. Check the S3 bucket policy for statements that deny access to objects.
+D. Confirm that the EC2 instance is using the correct key pair.
+E. Confirm that the IAM role associated with the EC2 instance has the proper privileges.
+F. Confirm that the instance and the S3 bucket are in the same Region.
+
+
+Ans : BCE
+5.	A Security Engineer must implement mutually authenticated TLS connections between containers that communicate inside a VPC.
+Which solution would be MOST secure and easy to maintain?
+A. Use AWS Certificate Manager to generate certificates from a public certificate authority and deploy them to all the containers.
+B. Create a self-signed certificate in one container and use AWS Secrets Manager to distribute the certificate to the other containers to establish trust.
+C. Use AWS Certificate Manager Private Certificate Authority (ACM PCA) to create a subordinate certificate authority, then create the private keys in the containers and sign them using the ACM PCA API.
+D. Use AWS Certificate Manager Private Certificate Authority (ACM PCA) to create a subordinate certificate authority, then use AWS Certificate Manager to generate the private certificates and deploy them to all the containers.
+
+
+Ans : C?
+
+6.	The Accounting department at Example Corp. has made a decision to hire a third-party firm, AnyCompany, to monitor Example Corp.'s AWS account to help optimize costs.
+The Security Engineer for Example Corp. has been tasked with providing AnyCompany with access to the required Example Corp. AWS resources. The Engineer has created an IAM role and granted permission to AnyCompany's AWS account to assume this role.
+When customers contact AnyCompany, they provide their role ARN for validation. The Engineer is concerned that one of AnyCompany's other customers might deduce Example Corp.'s role ARN and potentially compromise the company's account.
+What steps should the Engineer perform to prevent this outcome?
+A.	Create an IAM user and generate a set of long-term credentials. Provide the credentials to AnyCompany. Monitor access in IAM access advisor and plan to rotate credentials on a recurring basis.
+B.	Request an external ID from AnyCompany and add a condition with sts:Externald to the role's trust policy.
+C.	Require two-factor authentication by adding a condition to the role's trust policy with aws:MultiFactorAuthPresent.
+D.	Request an IP range from AnyCompany and add a condition with aws:SourceIp to the role's trust policy.
+
+
+Ans : B
+
+7.	A company maintains sensitive data in an Amazon S3 bucket that must be protected using an AWS KMS CMK. The company requires that keys be rotated automatically every year.
+How should the bucket be configured?
+A. Select server-side encryption with Amazon S3-managed keys (SSE-S3) and select an AWS-managed CMK.
+B. Select Amazon S3-AWS KMS managed encryption keys (S3-KMS) and select a customer-managed CMK with key rotation enabled.
+C. Select server-side encryption with Amazon S3-managed keys (SSE-S3) and select a customer-managed CMK that has imported key material.
+D. Select server-side encryption with AWS KMS-managed keys (SSE-KMS) and select an alias to an AWS-managed CMK.
+
+
+Ans : B
+
+8.	An Amazon S3 bucket is encrypted using an AWS KMS CMK. An IAM user is unable to download objects from the S3 bucket using the AWS Management
+Console; however, other users can download objects from the S3 bucket.
+Which policies should the Security Engineer review and modify to resolve this issue? (Select three.)
+A. The CMK policy
+B. The VPC endpoint policy
+C. The S3 bucket policy
+D. The S3 ACL
+E. The IAM policy
+
+
+Ans : ACE
+9.	While analyzing a company's security solution, a Security Engineer wants to secure the AWS account root user.
+What should the Security Engineer do to provide the highest level of security for the account?
+A. Create a new IAM user that has administrator permissions in the AWS account. Delete the password for the AWS account root user.
+B. Create a new IAM user that has administrator permissions in the AWS account. Modify the permissions for the existing IAM users.
+C. Replace the access key for the AWS account root user. Delete the password for the AWS account root user.
+D. Create a new IAM user that has administrator permissions in the AWS account. Enable multi-factor authentication for the AWS account root user.
+
+
+Ans : D
+10.	A Security Engineer is working with a Product team building a web application on AWS. The application uses Amazon S3 to host the static content, Amazon API
+Gateway to provide RESTful services; and Amazon DynamoDB as the backend data store. The users already exist in a directory that is exposed through a SAML identity provider.
+Which combination of the following actions should the Engineer take to enable users to be authenticated into the web application and call APIs? (Choose three.)
+A. Create a custom authorization service using AWS Lambda.
+B. Configure a SAML identity provider in Amazon Cognito to map attributes to the Amazon Cognito user pool attributes.
+C. Configure the SAML identity provider to add the Amazon Cognito user pool as a relying party.
+D. Configure an Amazon Cognito identity pool to integrate with social login providers.
+E. Update DynamoDB to store the user email addresses and passwords.
+F. Update API Gateway to use a COGNITO_USER_POOLS authorizer.
+
+
+Ans : BCF
+
+11.	While securing the connection between a company's VPC and its on-premises data center, a Security Engineer sent a ping command from an on-premises host
+(IP address 203.0.113.12) to an Amazon EC2 instance (IP address 172.31.16.139). The ping command did not return a response. The flow log in the VPC showed the following:
+2 123456789010 eni-1235b8ca 203.0.113.12 172.31.16.139 0 0 1 4 336 1432917027 1432917142 ACCEPT OK
+2 123456789010 eni-1235b8ca 172.31.16.139 203.0.113.12 0 0 1 4 336 1432917094 1432917142 REJECT OK
+What action should be performed to allow the ping to work?
+A. In the security group of the EC2 instance, allow inbound ICMP traffic.
+B. In the security group of the EC2 instance, allow outbound ICMP traffic.
+C. In the VPC's NACL, allow inbound ICMP traffic.
+D. In the VPC's NACL, allow outbound ICMP traffic.
+
+
+Ans : D
+
+12.	A Security Engineer is building a Java application that is running on Amazon EC2. The application communicates with an Amazon RDS instance and authenticates with a user name and password.
+Which combination of steps can the Engineer take to protect the credentials and minimize downtime when the credentials are rotated? (Choose two.)
+A. Have a Database Administrator encrypt the credentials and store the ciphertext in Amazon S3. Grant permission to the instance role associated with the EC2 instance to read the object and decrypt the ciphertext.
+B. Configure a scheduled job that updates the credential in AWS Systems Manager Parameter Store and notifies the Engineer that the application needs to be restarted.
+C. Configure automatic rotation of credentials in AWS Secrets Manager.
+D. Store the credential in an encrypted string parameter in AWS Systems Manager Parameter Store. Grant permission to the instance role associated with the EC2 instance to access the parameter and the AWS KMS key that is used to encrypt it.
+E. Configure the Java application to catch a connection failure and make a call to AWS Secrets Manager to retrieve updated credentials when the password is rotated. Grant permission to the instance role associated with the EC2 instance to access Secrets Manager.
+
+
+Ans : CE
+13.	A company has several production AWS accounts and a central security AWS account. The security account is used for centralized monitoring and has IAM privileges to all resources in every corporate account. All of the company's Amazon S3 buckets are tagged with a value denoting the data classification of their contents.
+A Security Engineer is deploying a monitoring solution in the security account that will enforce bucket policy compliance. The system must monitor S3 buckets in all production accounts and confirm that any policy change is in accordance with the bucket's data classification. If any change is out of compliance; the Security team must be notified quickly.
+Which combination of actions would build the required solution? (Choose three.)
+A. Configure Amazon CloudWatch Events in the production accounts to send all S3 events to the security account event bus.
+B. Enable Amazon GuardDuty in the security account. and join the production accounts as members.
+C. Configure an Amazon CloudWatch Events rule in the security account to detect S3 bucket creation or modification events.
+D. Enable AWS Trusted Advisor and activate email notifications for an email address assigned to the security contact.
+E. Invoke an AWS Lambda function in the security account to analyze S3 bucket settings in response to S3 events, and send non-compliance notifications to the Security team.
+F. Configure event notifications on S3 buckets for PUT; POST, and DELETE events.
+
+
+Ans : ACE
+14.	A company plans to migrate a sensitive dataset to Amazon S3. A Security Engineer must ensure that the data is encrypted at rest. The encryption solution must enable the company to generate its own keys without needing to manage key storage or the encryption process.
+What should the Security Engineer use to accomplish this?
+A. Server-side encryption with Amazon S3-managed keys (SSE-S3)
+B. Server-side encryption with AWS KMS-managed keys (SSE-KMS)
+C. Server-side encryption with customer-provided keys (SSE-C)
+D. Client-side encryption with an AWS KMS-managed CMK
+
+
+Ans : B
+15.	A Security Engineer is defining the logging solution for a newly developed product. Systems Administrators and Developers need to have appropriate access to event log files in AWS CloudTrail to support and troubleshoot the product.
+Which combination of controls should be used to protect against tampering with and unauthorized access to log files? (Choose two.)
+A.	Ensure that the log file integrity validation mechanism is enabled.
+B.	Ensure that all log files are written to at least two separate Amazon S3 buckets in the same account.
+C.	Ensure that Systems Administrators and Developers can edit log files, but prevent any other access.
+D.	Ensure that Systems Administrators and Developers with job-related need-to-know requirements only are capable of viewing""but not modifying""the log files.
+E.	Ensure that all log files are stored on Amazon EC2 instances that allow SSH access from the internal corporate network only.
+
+
+Ans : AD
+16.	A company has a few dozen application servers in private subnets behind an Elastic Load Balancer (ELB) in an AWS Auto Scaling group. The application is accessed from the web over HTTPS. The data must always be encrypted in transit. The Security Engineer is worried about potential key exposure due to vulnerabilities in the application software.
+Which approach will meet these requirements while protecting the external certificate during a breach?
+A.	Use a Network Load Balancer (NLB) to pass through traffic on port 443 from the internet to port 443 on the instances.
+B.	Purchase an external certificate, and upload it to the AWS Certificate Manager (for use with the ELB) and to the instances. Have the ELB decrypt traffic, and route and re-encrypt with the same certificate.
+C.	Generate an internal self-signed certificate and apply it to the instances. Use AWS Certificate Manager to generate a new external certificate for the ELB. Have the ELB decrypt traffic, and route and re-encrypt with the internal certificate.
+D.	Upload a new external certificate to the load balancer. Have the ELB decrypt the traffic and forward it on port 80 to the instances.
+
+
+Ans : C
+
+17.	Which of the following are valid event sources that are associated with web access control lists that trigger AWS WAF rules? (Choose two.)
+A.	Amazon S3 static web hosting
+B.	Amazon CloudFront distribution
+C.	Application Load Balancer
+D.	Amazon Route 53
+E.	VPC Flow Logs
+
+
+Ans : BC
+18.	A Security Engineer is working with the development team to design a supply chain application that stores sensitive inventory data in an Amazon S3 bucket. The application will use an AWS KMS customer master key (CMK) to encrypt the data on Amazon S3. The inventory data on Amazon S3 will be shared of vendors. All vendors will use AWS principals from their own AWS accounts to access the data on Amazon S3. The vendor list may change weekly, and the solution must support cross-account access.
+What is the MOST efficient way to manage access control for the KMS CMK7?
+A.	Use KMS grants to manage key access. Programmatically create and revoke grants to manage vendor access.
+B.	Use an IAM role to manage key access. Programmatically update the IAM role policies to manage vendor access.
+C.	Use KMS key policies to manage key access. Programmatically update the KMS key policies to manage vendor access.
+D.	Use delegated access across AWS accounts by using IAM roles to manage key access. Programmatically update the IAM trust policy to manage cross- account 
+
+
+Ans : A
+
+19.	A Security Engineer is setting up an AWS CloudTrail trail for all regions in an AWS account. For added security, the logs are stored using server-side encryption with AWS KMS-managed keys (SSE-KMS) and have log integrity validation enabled.
+While testing the solution, the Security Engineer discovers that the digest files are readable, but the log files are not. What is the MOST likely cause?
+A.	The log files fail integrity validation and automatically are marked as unavailable.
+B.	The KMS key policy does not grant the Security Engineer's IAM user or role permissions to decrypt with it.
+C.	The bucket is set up to use server-side encryption with Amazon S3-managed keys (SSE-S3) as the default and does not allow SSE-KMS-encrypted files.
+D.	An IAM policy applicable to the Security Engineer's IAM user or role denies access to the "CloudTrail/" prefix in the Amazon S3 bucket
+
+
+Ans : B
+20.	A corporate cloud security policy states that communications between the company's VPC and KMS must travel entirely within the AWS network and not use public service endpoints.
+
+Which combination of the following actions MOST satisfies this requirement? (Choose two.)
+A.	Add the aws:sourceVpce condition to the AWS KMS key policy referencing the company's VPC endpoint ID.
+B.	Remove the VPC internet gateway from the VPC and add a virtual private gateway to the VPC to prevent direct, public internet connectivity.
+C.	Create a VPC endpoint for AWS KMS with private DNS enabled.
+D.	Use the KMS Import Key feature to securely transfer the AWS KMS key over a VPN.
+E.	Add the following condition to the AWS KMS key policy: "aws:SourceIp": "10.0.0.0/16".
+
+
+Ans : AC
+
+21.	A company had one of its Amazon EC2 key pairs compromised. A Security Engineer must identify which current Linux EC2 instances were deployed and used the compromised key pair.
+How can this task be accomplished?
+A.	Obtain the list of instances by directly querying Amazon EC2 using: aws ec2 describe-instances --fi1ters "Name=key- name,Values=KEYNAMEHERE".
+B.	Obtain the fingerprint for the key pair from the AWS Management Console, then search for the fingerprint in the Amazon Inspector logs.
+C.	Obtain the output from the EC2 instance metadata using: curl http: //169.254.169.254/latest/meta-data/public- keys/0/.
+D.	Obtain the fingerprint for the key pair from the AWS Management Console, then search for the fingerprint in Amazon CloudWatch Logs using: aws logs filter-log-events.
+
+
+Ans : A
+
+
+22.	A Security Engineer for a large company is managing a data processing application used by 1,500 subsidiary companies. The parent and subsidiary companies all use AWS. The application uses TCP port 443 and runs on Amazon EC2 behind a Network Load Balancer (NLB). For compliance reasons, the application should only be accessible to the subsidiaries and should not be available on the public internet. To meet the compliance requirements for restricted access, the Engineer has received the public and private CIDR block ranges for each subsidiary
+What solution should the Engineer use to implement the appropriate access restrictions for the application?
+A.	Create a NACL to allow access on TCP port 443 from the 1;500 subsidiary CIDR block ranges. Associate the NACL to both the NLB and EC2 instances
+B.	Create an AWS security group to allow access on TCP port 443 from the 1,500 subsidiary CIDR block ranges. Associate the security group to the NLB. Create a second security group for EC2 instances with access on TCP port 443 from the NLB security group.
+C.	Create an AWS PrivateLink endpoint service in the parent company account attached to the NLB. Create an AWS security group for the instances to allow access on TCP port 443 from the AWS PrivateLink endpoint. Use AWS PrivateLink interface endpoints in the 1,500 subsidiary AWS accounts to connect to the data processing application.
+D.	Create an AWS security group to allow access on TCP port 443 from the 1,500 subsidiary CIDR block ranges. Associate the security group with EC2 instances.
+
+
+Ans : C
+23.	A company uses user data scripts that contain sensitive information to bootstrap Amazon EC2 instances. A Security Engineer discovers that this sensitive information is viewable by people who should not have access to it.
+What is the MOST secure way to protect the sensitive information used to bootstrap the instances?
+A.	Store the scripts in the AMI and encrypt the sensitive data using AWS KMS Use the instance role profile to control access to the KMS keys needed to decrypt the data.
+B.	Store the sensitive data in AWS Systems Manager Parameter Store using the encrypted string parameter and assign the GetParameters permission to the EC2 instance role.
+C.	Externalize the bootstrap scripts in Amazon S3 and encrypt them using AWS KMS. Remove the scripts from the instance and clear the logs after the instance is configured.
+D.	Block user access of the EC2 instance's metadata service using IAM policies. Remove all scripts and clear the logs after execution.
+
+
+Ans : B
+
+24.	A company is building a data lake on Amazon S3. The data consists of millions of small files containing sensitive information. The Security team has the following requirements for the architecture: "¢ Data must be encrypted in transit. "¢ Data must be encrypted at rest. "¢ The bucket must be private, but if the bucket is accidentally made public, the data must remain confidential.
+Which combination of steps would meet the requirements? (Choose two.)
+A.	Enable AES-256 encryption using server-side encryption with Amazon S3-managed encryption keys (SSE-S3) on the S3 bucket.
+B.	Enable default encryption with server-side encryption with AWS KMS-managed keys (SSE-KMS) on the S3 bucket.
+C.	Add a bucket policy that includes a deny if a PutObject request does not include aws:SecureTransport.
+D.	Add a bucket policy with aws:SourceIp to Allow uploads and downloads from the corporate intranet only.
+E.	Add a bucket policy that includes a deny if a PutObject request does not include s3:x-amz-server-side-encryption: "aws:kms".
+F.	Enable Amazon Macie to monitor and act on changes to the data lake's S3 bucket.
+
+
+Ans : BC
+25.	A Security Engineer discovered a vulnerability in an application running on Amazon ECS. The vulnerability allowed attackers to install malicious code. Analysis of the code shows it exfiltrates data on port 5353 in batches at random time intervals.
+
+While the code of the containers is being patched, how can Engineers quickly identify all compromised hosts and stop the egress of data on port 5353?
+A.	Enable AWS Shield Advanced and AWS WAF. Configure an AWS WAF custom filter for egress traffic on port 5353
+B.	Enable Amazon Inspector on Amazon ECS and configure a custom assessment to evaluate containers that have port 5353 open. Update the NACLs to block port 5353 outbound.
+C.	Create an Amazon CloudWatch custom metric on the VPC Flow Logs identifying egress traffic on port 5353. Update the NACLs to block port 5353 outbound.
+D.	Use Amazon Athena to query AWS CloudTrail logs in Amazon S3 and look for any traffic on port 5353. Update the security groups to block port 5353 outbound.
+
+
+Ans : C
+26.	An Amazon EC2 instance is denied access to a newly created AWS KMS CMK used for decrypt actions. The environment has the following configuration:
+✑ The instance is allowed the kms:Decrypt action in its IAM role for all resources
+✑ The AWS KMS CMK status is set to enabled
+✑ The instance can communicate with the KMS API using a configured VPC endpoint
+What is causing the issue?
+A.	The kms:GenerateDataKey permission is missing from the EC2 instance's IAM role
+B.	The ARN tag on the CMK contains the EC2 instance's ID instead of the instance's ARN
+C.	The kms:Encrypt permission is missing from the EC2 IAM role
+D.	The KMS CMK key policy that enables IAM user permissions is missing
+
+
+Ans : D
+27.	A company has enabled Amazon GuardDuty in all Regions as part of its security monitoring strategy. In one of the VPCs, the company hosts an Amazon EC2 instance working as an FTP server that is contacted by a high number of clients from multiple locations. This is identified by GuardDuty as a brute force attack due to the high number of connections that happen every hour.
+The finding has been flagged as a false positive. However, GuardDuty keeps raising the issue. A Security Engineer has been asked to improve the signal-to-noise ratio. The Engineer needs to ensure that changes do not compromise the visibility of potential anomalous behavior.
+How can the Security Engineer address the issue?
+A.	Disable the FTP rule in GuardDuty in the Region where the FTP server is deployed
+B.	Add the FTP server to a trusted IP list and deploy it to GuardDuty to stop receiving the notifications
+C.	Use GuardDuty filters with auto archiving enabled to close the findings
+D.	Create an AWS Lambda function that closes the finding whenever a new occurrence is reported
+
+
+Ans : B
+28.	What are the MOST secure ways to protect the AWS account root user of a recently opened AWS account? (Choose two.)
+A.	Use the AWS account root user access keys instead of the AWS Management Console
+B.	Enable multi-factor authentication for the AWS IAM users with the AdministratorAccess managed policy attached to them
+C.	Enable multi-factor authentication for the AWS account root user
+D.	Use AWS KMS to encrypt all AWS account root user and AWS IAM access keys and set automatic rotation to 30 days
+E.	Do not create access keys for the AWS account root user; instead, create AWS IAM users
+
+
+Ans : CE
+29.	A company has decided to migrate sensitive documents from on-premises data centers to Amazon S3. Currently, the hard drives are encrypted to meet a compliance requirement regarding data encryption. The CISO wants to improve security by encrypting each file using a different key instead of a single key. Using a different key would limit the security impact of a single exposed key.
+Which of the following requires the LEAST amount of configuration when implementing this approach?
+A.	Place each file into a different S3 bucket. Set the default encryption of each bucket to use a different AWS KMS customer managed key.
+B.	Put all the files in the same S3 bucket. Using S3 events as a trigger, write an AWS Lambda function to encrypt each file as it is added using different AWS KMS data keys.
+C.	Use the S3 encryption client to encrypt each file individually using S3-generated data keys
+D.	Place all the files in the same S3 bucket. Use server-side encryption with AWS KMS-managed keys (SSE-KMS) to encrypt the data
+
+
+Ans : D
+30.	A company has an encrypted Amazon S3 bucket. An Application Developer has an IAM policy that allows access to the S3 bucket, but the Application Developer is unable to access objects within the bucket.
+What is a possible cause of the issue?
+A.	The S3 ACL for the S3 bucket fails to explicitly grant access to the Application Developer
+B.	The AWS KMS key for the S3 bucket fails to list the Application Developer as an administrator
+C.	The S3 bucket policy fails to explicitly grant access to the Application Developer
+D.	The S3 bucket policy explicitly denies access to the Application Developer
+
+
+Ans : D
+
+31.	A Web Administrator for the website example.com has created an Amazon CloudFront distribution for dev.example.com, with a requirement to configure HTTPS using a custom TLS certificate imported to AWS Certificate Manager.
+Which combination of steps is required to ensure availability of the certificate in the CloudFront console? (Choose two.)
+A.	Call UploadServerCertificate with /cloudfront/dev/ in the path parameter.
+B.	Import the certificate with a 4,096-bit RSA public key.
+C.	Ensure that the certificate, private key, and certificate chain are PKCS #12-encoded.
+D.	Import the certificate in the us-east-1 (N. Virginia) Region.
+E.	Ensure that the certificate, private key, and certificate chain are PEM-encoded.
+
+
+Ans : AD
+
+32.	A Security Engineer has discovered that, although encryption was enabled on the Amazon S3 bucket examplebucket, anyone who has access to the bucket has the ability to retrieve the files. The Engineer wants to limit access to each IAM user can access an assigned folder only.
+What should the Security Engineer do to achieve this?
+A.	Use envelope encryption with the AWS-managed CMK aws/s3.
+B.	Create a customer-managed CMK with a key policy granting "kms:Decrypt" based on the "${aws:username}" variable.
+C.	Create a customer-managed CMK for each user. Add each user as a key user in their corresponding key policy.
+D.	Change the applicable IAM policy to grant S3 access to "Resource": "arn:aws:s3:::examplebucket/${aws:username}/*"
+
+
+Ans : D
+
+33.	An application uses Amazon Cognito to manage end users' permissions when directly accessing AWS resources, including Amazon DynamoDB. A new feature request reads as follows:
+The priorities are to reduce complexity and avoid potential for future security issues.
+Which approach will meet these requirements and priorities?
+A.	Create a new database field "suspended_status" and modify the application logic to validate that field when processing requests.
+B.	Add suspended customers to second Cognito user pool and update the application login flow to check both user pools.
+C.	Use Amazon Cognito Sync to push out a "suspension_status" parameter and split the lAM policy into normal users and suspended users.
+D.	Move suspended customers to a second Cognito group and define an appropriate IAM access policy for the group.
+
+
+Ans : D
+34.	A Security Engineer is looking for a way to control access to data that is being encrypted under a CMK. The Engineer is also looking to use additional authenticated data (AAD) to prevent tampering with ciphertext.
+Which action would provide the required functionality?
+A.	Pass the key alias to AWS KMS when calling Encrypt and Decrypt API actions.
+B.	Use IAM policies to restrict access to Encrypt and Decrypt API actions.
+C.	Use kms:EncryptionContext as a condition when defining IAM policies for the CMK.
+D.	Use key policies to restrict access to the appropriate IAM groups.
+
+
+Ans : C
+35. An application makes calls to AWS services using the AWS SDK. The application runs on Amazon EC2 instances with an associated IAM role. When the application attempts to access an object within an Amazon S3 bucket; the Administrator receives the following error message: HTTP 403: Access Denied.
+Which combination of steps should the Administrator take to troubleshoot this issue? (Select three.)
+A.	Confirm that the EC2 instance's security group authorizes S3 access.
+B.	Verify that the KMS key policy allows decrypt access for the KMS key for this IAM principle.
+C.	Check the S3 bucket policy for statements that deny access to objects.
+D.	Confirm that the EC2 instance is using the correct key pair.
+E.	Confirm that the IAM role associated with the EC2 instance has the proper privileges.
+F.	Confirm that the instance and the S3 bucket are in the same Region.
+
+
+Ans : BCE
+36. A Security Engineer must implement mutually authenticated TLS connections between containers that communicate inside a VPC.
+Which solution would be MOST secure and easy to maintain?
+A.	Use AWS Certificate Manager to generate certificates from a public certificate authority and deploy them to all the containers.
+B.	Create a self-signed certificate in one container and use AWS Secrets Manager to distribute the certificate to the other containers to establish trust.
+C.	Use AWS Certificate Manager Private Certificate Authority (ACM PCA) to create a subordinate certificate authority, then create the private keys in the containers and sign them using the ACM PCA API.
+D.	Use AWS Certificate Manager Private Certificate Authority (ACM PCA) to create a subordinate certificate authority, then use AWS Certificate Manager to generate the private certificates and deploy them to all the containers.
+
+
+Ans : D
+
+37. The Accounting department at Example Corp. has made a decision to hire a third-party firm, AnyCompany, to monitor Example Corp.'s AWS account to help optimize costs.
+The Security Engineer for Example Corp. has been tasked with providing AnyCompany with access to the required Example Corp. AWS resources. The Engineer has created an IAM role and granted permission to AnyCompany's AWS account to assume this role.
+When customers contact AnyCompany, they provide their role ARN for validation. The Engineer is concerned that one of AnyCompany's other customers might deduce Example Corp.'s role ARN and potentially compromise the company's account.
+What steps should the Engineer perform to prevent this outcome?
+A.	Create an IAM user and generate a set of long-term credentials. Provide the credentials to AnyCompany. Monitor access in IAM access advisor and plan to rotate credentials on a recurring basis.
+B.	Request an external ID from AnyCompany and add a condition with sts:Externald to the role's trust policy.
+C.	Require two-factor authentication by adding a condition to the role's trust policy with aws:MultiFactorAuthPresent.
+D.	Request an IP range from AnyCompany and add a condition with aws:SourceIp to the role's trust policy.
+
+
+Ans : B
+
+38. A company maintains sensitive data in an Amazon S3 bucket that must be protected using an AWS KMS CMK. The company requires that keys be rotated automatically every year.
+How should the bucket be configured?
+A.	Select server-side encryption with Amazon S3-managed keys (SSE-S3) and select an AWS-managed CMK.
+B.	Select Amazon S3-AWS KMS managed encryption keys (S3-KMS) and select a customer-managed CMK with key rotation enabled.
+C.	Select server-side encryption with Amazon S3-managed keys (SSE-S3) and select a customer-managed CMK that has imported key material.
+D.	Select server-side encryption with AWS KMS-managed keys (SSE-KMS) and select an alias to an AWS-managed CMK.
+
+
+Ans : B
+
+39. An Amazon S3 bucket is encrypted using an AWS KMS CMK. An IAM user is unable to download objects from the S3 bucket using the AWS Management
+Console; however, other users can download objects from the S3 bucket.
+Which policies should the Security Engineer review and modify to resolve this issue? (Select three.)
+A.	The CMK policy
+B.	The VPC endpoint policy
+C.	The S3 bucket policy
+D.	The S3 ACL
+E.	The IAM policy
+
+Ans : ACE
+
+40. While analyzing a company's security solution, a Security Engineer wants to secure the AWS account root user.
+What should the Security Engineer do to provide the highest level of security for the account?
+A.	Create a new IAM user that has administrator permissions in the AWS account. Delete the password for the AWS account root user.
+B.	Create a new IAM user that has administrator permissions in the AWS account. Modify the permissions for the existing IAM users.
+C.	Replace the access key for the AWS account root user. Delete the password for the AWS account root user.
+D.	Create a new IAM user that has administrator permissions in the AWS account. Enable multi-factor authentication for the AWS account root user.
+
+
+Ans : D
+
+41. A Security Engineer is working with a Product team building a web application on AWS. The application uses Amazon S3 to host the static content, Amazon API
+Gateway to provide RESTful services; and Amazon DynamoDB as the backend data store. The users already exist in a directory that is exposed through a SAML identity provider.
+Which combination of the following actions should the Engineer take to enable users to be authenticated into the web application and call APIs? (Choose three.)
+A.	Create a custom authorization service using AWS Lambda.
+B.	Configure a SAML identity provider in Amazon Cognito to map attributes to the Amazon Cognito user pool attributes.
+C.	Configure the SAML identity provider to add the Amazon Cognito user pool as a relying party.
+D.	Configure an Amazon Cognito identity pool to integrate with social login providers.
+E.	Update DynamoDB to store the user email addresses and passwords.
+F.	Update API Gateway to use a COGNITO_USER_POOLS authorizer.
+
+
+Ans : BCF
+
+42. While securing the connection between a company's VPC and its on-premises data center, a Security Engineer sent a ping command from an on-premises host
+(IP address 203.0.113.12) to an Amazon EC2 instance (IP address 172.31.16.139). The ping command did not return a response. The flow log in the VPC showed the following:
+2 123456789010 eni-1235b8ca 203.0.113.12 172.31.16.139 0 0 1 4 336 1432917027 1432917142 ACCEPT OK
+2 123456789010 eni-1235b8ca 172.31.16.139 203.0.113.12 0 0 1 4 336 1432917094 1432917142 REJECT OK
+What action should be performed to allow the ping to work?
+A.	In the security group of the EC2 instance, allow inbound ICMP traffic.
+B.	In the security group of the EC2 instance, allow outbound ICMP traffic.
+C.	In the VPC's NACL, allow inbound ICMP traffic.
+D.	In the VPC's NACL, allow outbound ICMP traffic.
+
+
+Ans : D
+
+43. A Security Engineer is building a Java application that is running on Amazon EC2. The application communicates with an Amazon RDS instance and authenticates with a user name and password.
+Which combination of steps can the Engineer take to protect the credentials and minimize downtime when the credentials are rotated? (Choose two.)
+A.	Have a Database Administrator encrypt the credentials and store the ciphertext in Amazon S3. Grant permission to the instance role associated with the EC2 instance to read the object and decrypt the ciphertext.
+B.	Configure a scheduled job that updates the credential in AWS Systems Manager Parameter Store and notifies the Engineer that the application needs to be restarted.
+C.	Configure automatic rotation of credentials in AWS Secrets Manager.
+D.	Store the credential in an encrypted string parameter in AWS Systems Manager Parameter Store. Grant permission to the instance role associated with the EC2 instance to access the parameter and the AWS KMS key that is used to encrypt it.
+E.	Configure the Java application to catch a connection failure and make a call to AWS Secrets Manager to retrieve updated credentials when the password is rotated. Grant permission to the instance role associated with the EC2 instance to access Secrets Manager.
+
+
+Ans : CE
+
+44. A company has several production AWS accounts and a central security AWS account. The security account is used for centralized monitoring and has IAM privileges to all resources in every corporate account. All of the company's Amazon S3 buckets are tagged with a value denoting the data classification of their contents.
+A Security Engineer is deploying a monitoring solution in the security account that will enforce bucket policy compliance. The system must monitor S3 buckets in all production accounts and confirm that any policy change is in accordance with the bucket's data classification. If any change is out of compliance; the Security team must be notified quickly.
+Which combination of actions would build the required solution? (Choose three.)
+A.	Configure Amazon CloudWatch Events in the production accounts to send all S3 events to the security account event bus.
+B.	Enable Amazon GuardDuty in the security account. and join the production accounts as members.
+C.	Configure an Amazon CloudWatch Events rule in the security account to detect S3 bucket creation or modification events.
+D.	Enable AWS Trusted Advisor and activate email notifications for an email address assigned to the security contact.
+E.	Invoke an AWS Lambda function in the security account to analyze S3 bucket settings in response to S3 events, and send non-compliance notifications to the Security team.
+F.	Configure event notifications on S3 buckets for PUT; POST, and DELETE events.
+
+
+Ans : CEF
+
+45. A company plans to migrate a sensitive dataset to Amazon S3. A Security Engineer must ensure that the data is encrypted at rest. The encryption solution must enable the company to generate its own keys without needing to manage key storage or the encryption process.
+What should the Security Engineer use to accomplish this?
+A.	Server-side encryption with Amazon S3-managed keys (SSE-S3)
+B.	Server-side encryption with AWS KMS-managed keys (SSE-KMS)
+C.	Server-side encryption with customer-provided keys (SSE-C)
+D.	Client-side encryption with an AWS KMS-managed CMK
+
+
+Ans : B
+
+46.  Security Engineer is defining the logging solution for a newly developed product. Systems Administrators and Developers need to have appropriate access to event log files in AWS CloudTrail to support and troubleshoot the product.
+Which combination of controls should be used to protect against tampering with and unauthorized access to log files? (Choose two.)
+A.	Ensure that the log file integrity validation mechanism is enabled.
+B.	Ensure that all log files are written to at least two separate Amazon S3 buckets in the same account.
+C.	Ensure that Systems Administrators and Developers can edit log files, but prevent any other access.
+D.	Ensure that Systems Administrators and Developers with job-related need-to-know requirements only are capable of viewing""but not modifying""the log files.
+E.	Ensure that all log files are stored on Amazon EC2 instances that allow SSH access from the internal corporate network only.
+
+
+Ans : AD
+
+47. A company has a few dozen application servers in private subnets behind an Elastic Load Balancer (ELB) in an AWS Auto Scaling group. The application is accessed from the web over HTTPS. The data must always be encrypted in transit. The Security Engineer is worried about potential key exposure due to vulnerabilities in the application software.
+Which approach will meet these requirements while protecting the external certificate during a breach?
+A.	Use a Network Load Balancer (NLB) to pass through traffic on port 443 from the internet to port 443 on the instances.
+B.	Purchase an external certificate, and upload it to the AWS Certificate Manager (for use with the ELB) and to the instances. Have the ELB decrypt traffic, and route and re-encrypt with the same certificate.
+C.	Generate an internal self-signed certificate and apply it to the instances. Use AWS Certificate Manager to generate a new external certificate for the ELB. Have the ELB decrypt traffic, and route and re-encrypt with the internal certificate.
+D.	Upload a new external certificate to the load balancer. Have the ELB decrypt the traffic and forward it on port 80 to the instances.
+
+
+Ans : C
+
+48. Which of the following are valid event sources that are associated with web access control lists that trigger AWS WAF rules? (Choose two.)
+A.	Amazon S3 static web hosting
+B.	Amazon CloudFront distribution
+C.	Application Load Balancer
+D.	Amazon Route 53
+E.	VPC Flow Logs
+
+
+Ans : BC
+
+49. A Security Engineer is working with the development team to design a supply chain application that stores sensitive inventory data in an Amazon S3 bucket. The application will use an AWS KMS customer master key (CMK) to encrypt the data on Amazon S3. The inventory data on Amazon S3 will be shared of vendors. All vendors will use AWS principals from their own AWS accounts to access the data on Amazon S3. The vendor list may change weekly, and the solution must support cross-account access.
+What is the MOST efficient way to manage access control for the KMS CMK7?
+A.	Use KMS grants to manage key access. Programmatically create and revoke grants to manage vendor access.
+B.	Use an IAM role to manage key access. Programmatically update the IAM role policies to manage vendor access.
+C.	Use KMS key policies to manage key access. Programmatically update the KMS key policies to manage vendor access.
+D.	Use delegated access across AWS accounts by using IAM roles to manage key access. Programmatically update the IAM trust policy to manage cross- account vendor access.
+
+
+Ans : A
+
+50. A Security Engineer is setting up an AWS CloudTrail trail for all regions in an AWS account. For added security, the logs are stored using server-side encryption with AWS KMS-managed keys (SSE-KMS) and have log integrity validation enabled.
+While testing the solution, the Security Engineer discovers that the digest files are readable, but the log files are not. What is the MOST likely cause?
+A.	The log files fail integrity validation and automatically are marked as unavailable.
+B.	The KMS key policy does not grant the Security Engineer's IAM user or role permissions to decrypt with it.
+C.	The bucket is set up to use server-side encryption with Amazon S3-managed keys (SSE-S3) as the default and does not allow SSE-KMS-encrypted files.
+D.	An IAM policy applicable to the Security Engineer's IAM user or role denies access to the "CloudTrail/" prefix in the Amazon S3 bucket
+
+
+Ans : B
+
+51. A corporate cloud security policy states that communications between the company's VPC and KMS must travel entirely within the AWS network and not use public service endpoints.
+Which combination of the following actions MOST satisfies this requirement? (Choose two.)
+A.	Add the aws:sourceVpce condition to the AWS KMS key policy referencing the company's VPC endpoint ID.
+B.	Remove the VPC internet gateway from the VPC and add a virtual private gateway to the VPC to prevent direct, public internet connectivity.
+C.	Create a VPC endpoint for AWS KMS with private DNS enabled.
+D.	Use the KMS Import Key feature to securely transfer the AWS KMS key over a VPN.
+E.	Add the following condition to the AWS KMS key policy: "aws:SourceIp": "10.0.0.0/16".
+
+
+Ans : AC
+52. A company had one of its Amazon EC2 key pairs compromised. A Security Engineer must identify which current Linux EC2 instances were deployed and used the compromised key pair.
+How can this task be accomplished?
+A.	Obtain the list of instances by directly querying Amazon EC2 using: aws ec2 describe-instances --fi1ters "Name=key- name,Values=KEYNAMEHERE".
+B.	Obtain the fingerprint for the key pair from the AWS Management Console, then search for the fingerprint in the Amazon Inspector logs.
+C.	Obtain the output from the EC2 instance metadata using: curl http: //169.254.169.254/latest/meta-data/public- keys/0/.
+D.	Obtain the fingerprint for the key pair from the AWS Management Console, then search for the fingerprint in Amazon CloudWatch Logs using: aws logs filter-log-events.
+
+
+Ans : A
+
+53. A Security Engineer for a large company is managing a data processing application used by 1,500 subsidiary companies. The parent and subsidiary companies all use AWS. The application uses TCP port 443 and runs on Amazon EC2 behind a Network Load Balancer (NLB). For compliance reasons, the application should only be accessible to the subsidiaries and should not be available on the public internet. To meet the compliance requirements for restricted access, the Engineer has received the public and private CIDR block ranges for each subsidiary
+What solution should the Engineer use to implement the appropriate access restrictions for the application?
+A.	Create a NACL to allow access on TCP port 443 from the 1;500 subsidiary CIDR block ranges. Associate the NACL to both the NLB and EC2 instances
+B.	Create an AWS security group to allow access on TCP port 443 from the 1,500 subsidiary CIDR block ranges. Associate the security group to the NLB. Create a second security group for EC2 instances with access on TCP port 443 from the NLB security group.
+C.	Create an AWS PrivateLink endpoint service in the parent company account attached to the NLB. Create an AWS security group for the instances to allow access on TCP port 443 from the AWS PrivateLink endpoint. Use AWS PrivateLink interface endpoints in the 1,500 subsidiary AWS accounts to connect to the data processing application.
+D.	Create an AWS security group to allow access on TCP port 443 from the 1,500 subsidiary CIDR block ranges. Associate the security group with EC2 instances.
+
+Ans : C
+54.  A company uses user data scripts that contain sensitive information to bootstrap Amazon EC2 instances. A Security Engineer discovers that this sensitive information is viewable by people who should not have access to it.
+What is the MOST secure way to protect the sensitive information used to bootstrap the instances?
+A.	Store the scripts in the AMI and encrypt the sensitive data using AWS KMS Use the instance role profile to control access to the KMS keys needed to decrypt the data.
+B.	Store the sensitive data in AWS Systems Manager Parameter Store using the encrypted string parameter and assign the GetParameters permission to the EC2 instance role.
+C.	Externalize the bootstrap scripts in Amazon S3 and encrypt them using AWS KMS. Remove the scripts from the instance and clear the logs after the instance is configured.
+D.	Block user access of the EC2 instance's metadata service using IAM policies. Remove all scripts and clear the logs after execution.
+
+Ans : B
+
+55. A company is building a data lake on Amazon S3. The data consists of millions of small files containing sensitive information. The Security team has the following requirements for the architecture: "¢ Data must be encrypted in transit. "¢ Data must be encrypted at rest. "¢ The bucket must be private, but if the bucket is accidentally made public, the data must remain confidential.
+Which combination of steps would meet the requirements? (Choose two.)
+A.	Enable AES-256 encryption using server-side encryption with Amazon S3-managed encryption keys (SSE-S3) on the S3 bucket.
+B.	Enable default encryption with server-side encryption with AWS KMS-managed keys (SSE-KMS) on the S3 bucket.
+C.	Add a bucket policy that includes a deny if a PutObject request does not include aws:SecureTransport.
+D.	Add a bucket policy with aws:SourceIp to Allow uploads and downloads from the corporate intranet only.
+E.	Add a bucket policy that includes a deny if a PutObject request does not include s3:x-amz-server-side-encryption: "aws:kms".
+F.	Enable Amazon Macie to monitor and act on changes to the data lake's S3 bucket.
+
+
+Ans : BC
+
+56. A Security Engineer discovered a vulnerability in an application running on Amazon ECS. The vulnerability allowed attackers to install malicious code. Analysis of the code shows it exfiltrates data on port 5353 in batches at random time intervals.
+While the code of the containers is being patched, how can Engineers quickly identify all compromised hosts and stop the egress of data on port 5353?
+A.	Enable AWS Shield Advanced and AWS WAF. Configure an AWS WAF custom filter for egress traffic on port 5353
+B.	Enable Amazon Inspector on Amazon ECS and configure a custom assessment to evaluate containers that have port 5353 open. Update the NACLs to block port 5353 outbound.
+C.	Create an Amazon CloudWatch custom metric on the VPC Flow Logs identifying egress traffic on port 5353. Update the NACLs to block port 5353 outbound.
+D.	Use Amazon Athena to query AWS CloudTrail logs in Amazon S3 and look for any traffic on port 5353. Update the security groups to block port 5353 outbound.
+
+
+Ans : C

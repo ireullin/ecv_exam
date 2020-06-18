@@ -1,9 +1,11 @@
+import controllers.AWSSecurityPart1
+import controllers.AWSSecurityPart2
 import controllers.BigData20200413
 import controllers.Example
 import io.ktor.application.*
 import io.ktor.http.content.resources
 import io.ktor.http.content.static
-import io.ktor.routing.*2
+import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import libs.json.toJson
@@ -19,9 +21,18 @@ fun main(args:Array<String>) {
 //            get("/"){Example(call).index()}
 
             route("/v0.1/exam/BigData_20200413") {
-                get("/") { BigData20200413(call).index() }
                 get("/question") { BigData20200413(call).getQuestion() }
                 get("/question/{num}") { BigData20200413(call).getQuestion() }
+            }
+
+            route("/v0.1/exam/AWSSecurityPart1") {
+                get("/question") { AWSSecurityPart1(call).getQuestion() }
+                get("/question/{num}") { AWSSecurityPart1(call).getQuestion() }
+            }
+
+            route("/v0.1/exam/AWSSecurityPart2") {
+                get("/question") { AWSSecurityPart2(call).getQuestion() }
+                get("/question/{num}") { AWSSecurityPart2(call).getQuestion() }
             }
 
             route("/echo"){
