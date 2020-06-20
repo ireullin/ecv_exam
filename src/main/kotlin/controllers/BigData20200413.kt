@@ -15,7 +15,7 @@ import kotlin.random.Random
 class BigData20200413(val call: ApplicationCall, val newSession:(correct:Int, total:Int)->HitSession){
     companion object{
         data class Question(val qNum:String, val q:String, val opts:List<String>, val ans:String, val comment:String)
-        val name = "BigData20200413"
+        val name = "BigData_20200413"
         private val questions:MutableList<Question> = mutableListOf()
         private val r = Random(ImmutableDatetime.now().stamp())
     }
@@ -42,8 +42,8 @@ class BigData20200413(val call: ApplicationCall, val newSession:(correct:Int, to
         val html = Html("/question.ftl").render(
                 "correct" to sess.correct,
                 "total" to sess.total,
-                "title" to name,
-                "path" to "BigData_20200413",
+                "title" to "BigData 20200413",
+                "path" to name,
                 "num" to q.qNum,
                 "content" to q.q,
                 "opts" to q.opts,

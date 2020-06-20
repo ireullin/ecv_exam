@@ -42,7 +42,7 @@ class AWSSecurityPart1 (val call: ApplicationCall, val newSession:(correct:Int, 
                 "correct" to sess.correct,
                 "total" to sess.total,
                 "title" to "AWS Security Part1",
-                "path" to "AWSSecurityPart1",
+                "path" to name,
                 "num" to "",
                 "content" to q.q,
                 "opts" to q.opts,
@@ -90,7 +90,4 @@ class AWSSecurityPart1 (val call: ApplicationCall, val newSession:(correct:Int, 
     }
 
     fun dropRedundancy(s:String)= s.replace("Ans :","").replace('\n', ' ').trim()
-
-
-
 }

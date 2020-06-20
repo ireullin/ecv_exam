@@ -42,8 +42,8 @@ class AWSSecurityPart2 (val call: ApplicationCall, val newSession:(correct:Int, 
         val html = Html("/question.ftl").render(
                 "correct" to sess.correct,
                 "total" to sess.total,
-                "title" to name,
-                "path" to "AWSSecurityPart2",
+                "title" to "AWS Security Part2",
+                "path" to name,
                 "num" to q.qNum,
                 "content" to q.q,
                 "opts" to q.opts,
@@ -87,7 +87,4 @@ class AWSSecurityPart2 (val call: ApplicationCall, val newSession:(correct:Int, 
     }
 
     fun dropRedundancy(s:String)= s.replace("Ans :","").replace("\n", "").trim()
-
-
-
 }
