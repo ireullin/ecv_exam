@@ -4,13 +4,17 @@ import helpers.Html
 import io.ktor.application.ApplicationCall
 import io.ktor.http.ContentType
 import io.ktor.response.respondText
+import io.ktor.sessions.sessions
 import libs.datetime.ImmutableDatetime
+import libs.json.Json
 import org.slf4j.LoggerFactory
+import sessions.HitSession
 import java.io.File
 import kotlin.random.Random
 
-class AWSSecurityPart2 (val call: ApplicationCall){
+class AWSSecurityPart2 (val call: ApplicationCall, val newSession:(correct:Int, total:Int)->HitSession){
     companion object{
+        val name = "AWSSecurityPart2"
         data class Question(val qNum:String, val q:String, val opts:List<String>, val ans:String, val comment:String)
         private val questions:MutableList<Question> = mutableListOf()
         private val r = Random(ImmutableDatetime.now().stamp())
@@ -18,15 +22,27 @@ class AWSSecurityPart2 (val call: ApplicationCall){
 
     private val log = LoggerFactory.getLogger(this.javaClass)
 
+
+    suspend fun hit(){
+        val correct = call.parameters["correct"]?.toInt()?:0
+        val sess = (call.sessions.get(name)?:newSession(0,0)) as HitSession
+        val newSess = newSession( sess.correct+correct, sess.total+1 )
+        call.sessions.set(name, newSess)
+        call.respondText( Json.stringify(newSess) ,ContentType.Application.Json)
+    }
+
     suspend fun getQuestion(){
         if(questions.isEmpty())
             parse()
 
+        val sess = (call.sessions.get(name)?:newSession(0,0)) as HitSession
         val num = call.parameters["num"]?.toInt()?: r.nextInt(1, questions.size)
         val idx = num -1
         val q = questions[idx]
         val html = Html("/question.ftl").render(
-                "title" to "AWS Security Part2",
+                "correct" to sess.correct,
+                "total" to sess.total,
+                "title" to name,
                 "path" to "AWSSecurityPart2",
                 "num" to q.qNum,
                 "content" to q.q,

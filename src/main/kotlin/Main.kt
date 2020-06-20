@@ -8,31 +8,43 @@ import io.ktor.http.content.static
 import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import libs.json.toJson
+import io.ktor.sessions.Sessions
+import io.ktor.sessions.cookie
+import sessions.SessionAWSSecurityPart1
+import sessions.SessionAWSSecurityPart2
+import sessions.SessionBigData20200413
+
 
 fun main(args:Array<String>) {
-//    val test = "A. Copy the data into Amazon ElastiCache to perform text analysis on the in-memory"
-//    val optReg = Regex("^[A-H]{1}\\.\\s+[\\s\\S]*$")
-//    println(optReg.matches(test))
-//    return
-
     embeddedServer(Netty, 22333) {
         routing {
+
+            install(Sessions){
+                cookie<SessionAWSSecurityPart1>(AWSSecurityPart1.name)
+                cookie<SessionAWSSecurityPart2>(AWSSecurityPart2.name)
+                cookie<SessionBigData20200413>(BigData20200413.name)
+            }
+
+
             get("/"){Example(call).index()}
 
             route("/v0.1/exam/BigData_20200413") {
-                get("/question") { BigData20200413(call).getQuestion() }
-                get("/question/{num}") { BigData20200413(call).getQuestion() }
+
+                get("/correct/{correct}") { BigData20200413(call){c,t->SessionBigData20200413(c,t)}.hit() }
+                get("/question") { BigData20200413(call){c,t->SessionBigData20200413(c,t)}.getQuestion() }
+                get("/question/{num}") { BigData20200413(call){c,t->SessionBigData20200413(c,t)}.getQuestion() }
             }
 
             route("/v0.1/exam/AWSSecurityPart1") {
-                get("/question") { AWSSecurityPart1(call).getQuestion() }
-                get("/question/{num}") { AWSSecurityPart1(call).getQuestion() }
+                get("/correct/{correct}") { AWSSecurityPart1(call){c,t->SessionAWSSecurityPart1(c,t)}.hit() }
+                get("/question") { AWSSecurityPart1(call){c,t->SessionAWSSecurityPart1(c,t)}.getQuestion() }
+                get("/question/{num}") { AWSSecurityPart1(call){c,t->SessionAWSSecurityPart1(c,t)}.getQuestion() }
             }
 
             route("/v0.1/exam/AWSSecurityPart2") {
-                get("/question") { AWSSecurityPart2(call).getQuestion() }
-                get("/question/{num}") { AWSSecurityPart2(call).getQuestion() }
+                get("/correct/{correct}") { AWSSecurityPart2(call){c,t->SessionAWSSecurityPart2(c,t)}.hit() }
+                get("/question") { AWSSecurityPart2(call){c,t->SessionAWSSecurityPart2(c,t)}.getQuestion() }
+                get("/question/{num}") { AWSSecurityPart2(call){c,t->SessionAWSSecurityPart2(c,t)}.getQuestion() }
             }
 
             route("/echo"){

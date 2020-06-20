@@ -5,6 +5,7 @@
 <div class="container">
     <h1>${title}</h1>
     <h2>${num}</h2>
+    <p id="hits"> ${correct} / ${total} </p>
     <hr>
     <div class="btn-group" role="group" aria-label="Basic example">
         <button id="btn_pre"  type="button" class="btn btn-secondary" >上一題</button>
@@ -27,7 +28,7 @@
     <br>
     <div id="result"></div>
     <br>
-    <button id="show_ans" type="button" class="btn btn-primary btn-lg btn-block" >顯示答案</button>
+    <button id="show_ans" type="button" class="btn btn-primary btn-lg btn-block" >Submit</button>
     <br>
    
 
@@ -67,9 +68,18 @@ function showAns(){
     console.log(isCorrect);
     if(isCorrect){
         $("#result").html('<div class="alert alert-success" role="alert">正確</div>');
+        $.get("/v0.1/exam/${path}/correct/1", refreshHits);
+        $('#show_ans').prop('disabled', true);
     }else{
         $("#result").html('<div class="alert alert-danger" role="alert">錯誤</div>');
+        $.get("/v0.1/exam/${path}/correct/0", refreshHits);
     }
+
+}
+
+function refreshHits(e){
+    console.log(e);
+    $("#hits").html(e.correct + " / " + e.total);
 
 }
 
