@@ -576,8 +576,7 @@ D.	Move the training to Amazon EMR and distribute the workload to as many machin
 
 
 Ans : B
-Horovod-基于TensorFlow分布式深度学习框架 : 分布式训练的方法
-DeepAR 預測演算法
+
 54.  Which of the following metrics should a Machine Learning Specialist generally use to compare/evaluate machine learning classification models against each other?
 A.	Recall
 B.	Misclassification rate
@@ -630,8 +629,8 @@ D.	Amazon Kinesis Data Analytics
 
 Ans : C
 
-59.  A Data Scientist is developing a machine learning model to classify whether a financial transaction is fraudulent. The labeled data available for training consists of
-100,000 non-fraudulent observations and 1,000 fraudulent observations.
+59.  A Data Scientist is developing a machine learning model to classify whether a financial transaction is fraudulent. The labeled data available for training consists of 100,000
+non-fraudulent observations and 1,000 fraudulent observations.
 The Data Scientist applies the XGBoost algorithm to the data, resulting in the following confusion matrix when the trained model is applied to a previously unseen validation dataset. The accuracy of the model is 99.1%, but the Data Scientist has been asked to reduce the number of false negatives.
  
 Which combination of steps should the Data Scientist take to reduce the number of false positive predictions by the model? (Choose two.)
