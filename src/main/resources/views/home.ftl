@@ -11,6 +11,8 @@
 <a href="/v0.1/exam/AWSSecurityPart1/question">AWS Security Part1</a>
 <br>
 <a href="/v0.1/exam/AWSSecurityPart2/question">AWS Security Part2</a>
+<br>
+<a href="/v0.1/exam/MachineLearning/question">Machine Learning</a>
 </div>
 </body>
 </html>
