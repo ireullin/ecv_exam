@@ -13,6 +13,10 @@
 <a href="/v0.1/exam/AWSSecurityPart2/question">AWS Security Part2</a>
 <br>
 <a href="/v0.1/exam/MachineLearning/question">Machine Learning</a>
+<br>
+<a href="/v0.1/exam/DataAnalytics/question">DataAnalytics</a>
+
+
 </div>
 </body>
 </html>

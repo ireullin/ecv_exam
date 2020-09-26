@@ -5,4 +5,5 @@ class SessionBigData20200413(correct: Int = 0,  total: Int = 0):HitSession(corre
 class SessionAWSSecurityPart1(correct: Int = 0, total: Int = 0):HitSession(correct, total)
 class SessionAWSSecurityPart2(correct: Int = 0, total: Int = 0):HitSession(correct, total)
 class SessionMachineLearning(correct: Int = 0, total: Int = 0):HitSession(correct, total)
+class SessionDataAnalytics(correct: Int = 0, total: Int = 0):HitSession(correct, total)
 
