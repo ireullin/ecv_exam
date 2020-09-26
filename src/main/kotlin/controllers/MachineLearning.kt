@@ -42,7 +42,7 @@ class MachineLearning(val call: ApplicationCall, val newSession:(correct:Int, to
         val html = Html("/question.ftl").render(
                 "correct" to sess.correct,
                 "total" to sess.total,
-                "title" to "BigData 20200413",
+                "title" to "Machine learning",
                 "path" to name,
                 "num" to q.qNum,
                 "content" to q.q,
@@ -68,9 +68,9 @@ class MachineLearning(val call: ApplicationCall, val newSession:(correct:Int, to
         }
 
         val optReg = Regex("^[A-H]{1}\\.\\s+[\\s\\S]*$")
-        val _questions = subtitles.map {sub->
+        val _questions = subtitles.mapIndexed {i,sub->
             val part = mutableListOf(mutableListOf<String>()) //mutableListOf<MutableList<String>>()
-            sub.drop(1).forEach{ line->
+            sub.forEach{ line->
                 log.info(line)
                 when{
                     optReg.matches(line) -> part.add(mutableListOf(line))
@@ -80,7 +80,7 @@ class MachineLearning(val call: ApplicationCall, val newSession:(correct:Int, to
             }
             val t = part.map { it.joinToString("\n") }
             log.info(t.toString())
-            Question(sub[0], t.first(), t.drop(1).dropLast(1), t.last(),"" )
+            Question((i+1).toString(), t.first(), t.drop(1).dropLast(1), t.last(),"" )
         }
 
         questions.clear()
