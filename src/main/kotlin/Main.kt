@@ -21,6 +21,7 @@ fun main(args:Array<String>) {
                 cookie<SessionBigData20200413>(BigData20200413.name)
                 cookie<SessionMachineLearning>(MachineLearning.name)
                 cookie<SessionDataAnalytics>(DataAnalytics.name)
+                cookie<SessionDataBase>(DataBase.name)
             }
 
             get("/"){Example(call).index()}
@@ -53,6 +54,13 @@ fun main(args:Array<String>) {
                 get("/correct/{correct}") { DataAnalytics(call){ c, t->SessionDataAnalytics(c,t)}.hit() }
                 get("/question") { DataAnalytics(call){c,t->SessionDataAnalytics(c,t)}.getQuestion() }
                 get("/question/{num}") { DataAnalytics(call){c,t->SessionDataAnalytics(c,t)}.getQuestion() }
+            }
+
+
+            route("/v0.1/exam/DataBase") {
+                get("/correct/{correct}") { DataBase(call){ c, t->SessionDataBase(c,t)}.hit() }
+                get("/question") { DataBase(call){c,t->SessionDataBase(c,t)}.getQuestion() }
+                get("/question/{num}") { DataBase(call){c,t->SessionDataBase(c,t)}.getQuestion() }
             }
 
             route("/echo"){

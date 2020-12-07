@@ -13,6 +13,9 @@
         <button id="btn_next" type="button" class="btn btn-secondary" >下一題</button>
     </div>
     <br>
+    <br>
+    <button id="show_ans" type="button" class="btn btn-primary btn-lg btn-block" >Show Answer</button>
+    <br>
     <br>  
     <p>${content}</p>
     <br>
@@ -28,8 +31,9 @@
     <br>
     <div id="result"></div>
     <br>
-    <button id="show_ans" type="button" class="btn btn-primary btn-lg btn-block" >Submit</button>
+    <button id="check_ans" type="button" class="btn btn-primary btn-lg btn-block" >Submit</button>
     <br>
+
    
 
 </div>
@@ -41,12 +45,17 @@ $(function() {
     $("#btn_pre").bind("click",  function(e){ window.location = "/v0.1/exam/${path}/question/${pre}"; });
     $("#btn_ran").bind("click",  function(e){ window.location = "/v0.1/exam/${path}/question"; });
     $("#btn_next").bind("click", function(e){ window.location = "/v0.1/exam/${path}/question/${next}"; });
+    $("#check_ans").bind("click", checkAns);
     $("#show_ans").bind("click", showAns);
 });
 
-
 function showAns(){
     const ans = "${ans}";
+    $("#result").html('<div class="alert alert-warning" role="alert">Answer is '+ans+'</div>');
+}
+
+function checkAns(){
+    const ans = "${ans}";+
     console.log("Ans is " +ans);
 
     const chars = ['A','B','C','D','E','F','G','H'];
@@ -69,7 +78,7 @@ function showAns(){
     if(isCorrect){
         $("#result").html('<div class="alert alert-success" role="alert">正確</div>');
         $.get("/v0.1/exam/${path}/correct/1", refreshHits);
-        $('#show_ans').prop('disabled', true);
+        $('#check_ans').prop('disabled', true);
     }else{
         $("#result").html('<div class="alert alert-danger" role="alert">錯誤</div>');
         $.get("/v0.1/exam/${path}/correct/0", refreshHits);
